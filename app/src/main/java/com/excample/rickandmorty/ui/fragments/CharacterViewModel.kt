@@ -1,5 +1,7 @@
 package com.excample.rickandmorty.ui.fragments
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,17 +20,19 @@ class CharacterViewModel : ViewModel() {
     val errorLiveData: LiveData<String> = _errorLiveData
 
     init {
-        getChatacters()
+        getChatacters(page = 1)
     }
 
-    private fun getChatacters() {
+    fun getChatacters(page:Int ) {
         repository.getCharacters(
             onSuccess = {
                 _charactersLiveData.value = it
             },
             onFailure = {
                 _errorLiveData.value = it
-            }
+            },
+            page = page
         )
     }
+
 }

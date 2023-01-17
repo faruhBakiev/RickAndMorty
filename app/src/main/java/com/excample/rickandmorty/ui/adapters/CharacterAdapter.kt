@@ -10,9 +10,18 @@ import com.excample.rickandmorty.data.models.Characters
 import com.excample.rickandmorty.databinding.ItemCharacterBinding
 
 
-class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.CharactersViewHolder>(diffUtil) {
+class CharacterAdapter (private val onClickListener: (id: Int) -> Unit) :
+    ListAdapter<Characters,CharacterAdapter.CharactersViewHolder>(diffUtil) {
+
     inner class CharactersViewHolder(private val binding: ItemCharacterBinding) :
         ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                getItem(adapterPosition).apply { onClickListener }
+            }
+        }
+
         fun onBind(item: Characters) {
             Glide.with(binding.ivCharacter.context)
                 .load(item.image)
@@ -48,7 +57,6 @@ class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.CharactersView
             override fun areContentsTheSame(oldItem: Characters, newItem: Characters): Boolean {
                 return oldItem.name == newItem.name
             }
-
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.excample.rickandmorty.data.models
 
+import android.view.View
 import com.google.gson.annotations.SerializedName
 
 data class Characters(
@@ -26,5 +27,4 @@ data class Characters(
     @SerializedName("url")
     val url: String = "",
     @SerializedName("status")
-    val status: String = ""
-)
+    val status: String = "")
