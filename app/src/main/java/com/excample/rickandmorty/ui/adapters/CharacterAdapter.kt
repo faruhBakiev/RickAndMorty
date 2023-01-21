@@ -10,7 +10,7 @@ import com.excample.rickandmorty.data.models.Characters
 import com.excample.rickandmorty.databinding.ItemCharacterBinding
 
 
-class CharacterAdapter (private val ClickListener: (id: Int) -> Unit) :
+class CharacterAdapter (private val clickListener: (id: Int) -> Unit) :
     ListAdapter<Characters,CharacterAdapter.CharactersViewHolder>(diffUtil) {
 
     inner class CharactersViewHolder(private val binding: ItemCharacterBinding) :
@@ -18,7 +18,7 @@ class CharacterAdapter (private val ClickListener: (id: Int) -> Unit) :
 
         init {
             itemView.setOnClickListener {
-                getItem(adapterPosition).apply { ClickListener (id) }
+                getItem(adapterPosition).apply { clickListener (id) }
             }
         }
 

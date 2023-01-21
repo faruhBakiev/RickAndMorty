@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,7 +16,7 @@ import com.excample.rickandmorty.ui.adapters.CharacterAdapter
 
 class CharacterFragment : Fragment() {
 
-    private lateinit var binding: FragmentCharacterBinding
+    private var binding: FragmentCharacterBinding? = null
     private val viewModel by viewModels<CharacterViewModel>()
     private val characterAdapter = CharacterAdapter(this::  onClickFirstListener)
     private val allCharacters = arrayListOf<Characters>()
@@ -24,20 +25,20 @@ class CharacterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObserve()
         initialize()
         setupListeners()
+        setupObserve()
     }
 
     private fun initialize() {
-        binding.rvCharacters.adapter = characterAdapter
+        binding?.rvCharacters?.adapter = characterAdapter
     }
 
     private fun onClickFirstListener(id: Int) {
@@ -49,7 +50,7 @@ class CharacterFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.btnGetMore.setOnClickListener {
+        binding?.btnGetMore?.setOnClickListener {
             viewModel.getChatacters(page = add++)
         }
     }
@@ -61,10 +62,8 @@ class CharacterFragment : Fragment() {
             characterAdapter.submitList(allCharacters)
             characterAdapter.notifyDataSetChanged()
         }
-
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
-
+            Toast.makeText(requireContext(), "HelloWorld", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
