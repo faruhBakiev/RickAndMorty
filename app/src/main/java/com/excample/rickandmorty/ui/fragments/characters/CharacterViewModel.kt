@@ -1,4 +1,4 @@
-package com.excample.rickandmorty.ui.fragments
+package com.excample.rickandmorty.ui.fragments.characters
 
 import android.content.ContentValues.TAG
 import android.util.Log

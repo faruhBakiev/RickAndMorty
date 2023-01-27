@@ -1,8 +1,7 @@
-package com.excample.rickandmorty.ui.fragments
+package com.excample.rickandmorty.ui.fragments.characters
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
